@@ -38,16 +38,15 @@ def json_request(
                 error = lambda e: print('%s %s' % (e, datetime.now()), file=sys.stderr)):
                 #[ success = None ] : callBack하는 비동기식의 함수
     try:
-        request = Request(url)
+        request = Request(url)  #객체생성
         resp = urlopen(request)  # 응답 받기
 
-        json_request = resp.read().decode(encoding)  # 응답 읽기 (바디 내용)  - 바이트로 통신    인코딩 했으면 디코딩도 해야함
-        json_result = json.loads(json_request)
+        json_req = resp.read().decode(encoding)  # 응답 읽기 (바디 내용)  - 바이트로 통신    인코딩 했으면 디코딩도 해야함
+        json_result = json.loads(json_req)
         print('%s : success for request[%s]' % (datetime.now(), url)) #성공 로그를 남김
 
         if callable(success) is False: #이까지온다면 성공이고 success는 성공함수다
             return json_result
-
 
         success(json_result)
 
