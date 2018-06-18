@@ -40,4 +40,15 @@ if __name__ == '__main__':
 
         filename = '%s_%s_%s' % (item['pagename'], item['since'], item['until'])
         visualize.wordcloud(filename, count_m50)
-        # visualize.graph_bar()
+        visualize.graph_bar(
+            title='%s 빈도 분석' % (item['pagename']),
+            xlabel='단어',
+            ylabel='빈도수',
+            values=list(count_m50.values()),
+            ticks=list(count_m50.keys()),
+            showgrid=False,  #grid가 싫으면(안이쁘면) false로 두면된다.
+            filename=filename,  #디폴트(저장하기위해서)
+            showgraph=False #윈도 창을 뜨게 할건지 말건지 표시
+        )
+
+        #6/18 그래프 bar 완성하기
