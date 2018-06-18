@@ -4,7 +4,7 @@ from .api import api
 import os
 import json
 
-RESULT_DIRECTORY = '__results__/crawling'
+# RESULT_DIRECTORY = '__results__/crawling'
 
 
 def preprocess_post(post):      #data 전처리 적재하기전의 과정
@@ -33,12 +33,16 @@ def preprocess_post(post):      #data 전처리 적재하기전의 과정
     kst = kst + timedelta(hours=9)
     post['created_time'] = kst.strftime('%Y-%m-%d %H:%M:%S')
 
-def crawling(pagename, since, until, fetch=True):
+def crawling(pagename, since, until, fetch=True, result_directory='', access_key=''):
     results = []
-    filename = '%s/%s_%s_%s.json' %(RESULT_DIRECTORY, pagename, since, until)
+    filename = '%s/%s_%s_%s.json' %(result_directory, pagename, since, until)
 
     if fetch:
-        for posts in api.fb_fetch_posts(pagename, since, until):
+        for posts in api.fb_fetch_posts(
+                pagename=pagename,
+                since=since,
+                until=until,
+                access_key=access_key):
             for post in posts:
                 preprocess_post(post)
             results += posts

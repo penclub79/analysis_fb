@@ -2,12 +2,12 @@
 from urllib.parse import urlencode
 from .web_request import json_request
 
-ACCESS_TOKEN="EAACEdEose0cBAIvFV8ihrEELt98NdWcZBZCPTmHbkgEjPGmOq7oKZAJ4shqeNGF60YuOMp4smC8RghMvzDWGd7ZC0ESn4ImjiX1gnQdZCEPd5bZC0Gay5y3HnSDlNHG8rA2cOjGhgsmfr092jVgEDWmZACbwBuYuKnZBTMPKIT3NmZBAgFCagbH2WgV85oI4vUQDfWOsorud58QZDZD"
-BASE_URL_FB_API = "https://graph.facebook.com/v3.0"     #고정된 값이고 주소 외우삼
+# ACCESS_TOKEN="EAACEdEose0cBAIvFV8ihrEELt98NdWcZBZCPTmHbkgEjPGmOq7oKZAJ4shqeNGF60YuOMp4smC8RghMvzDWGd7ZC0ESn4ImjiX1gnQdZCEPd5bZC0Gay5y3HnSDlNHG8rA2cOjGhgsmfr092jVgEDWmZACbwBuYuKnZBTMPKIT3NmZBAgFCagbH2WgV85oI4vUQDfWOsorud58QZDZD"
+# BASE_URL_FB_API = "https://graph.facebook.com/v3.0"     #고정된 값이고 주소 외우삼
 
 
 def fb_gen_url(
-        base=BASE_URL_FB_API,
+        base,
         node='', #안넣을수도있으니까 기본값으로
         **params):      #페이스북 url을 generatic을 한다.
     url = '%s/%s/?%s' % (base, node, urlencode(params))
@@ -16,13 +16,13 @@ def fb_gen_url(
 #     이 방법도 가능
 
 def fb_name_to_id(pagename):
-    url = fb_gen_url(node=pagename, access_token=ACCESS_TOKEN)
+    url = fb_gen_url(node=pagename, access_token='')
 
     json_result = json_request(url=url)
     return json_result.get("id")
 
 
-def fb_fetch_posts(pagename, since, until):
+def fb_fetch_posts(pagename, since, until, access_token=''):
 
     url = fb_gen_url(
         node=fb_name_to_id(pagename)+"/posts/",
@@ -30,7 +30,7 @@ def fb_fetch_posts(pagename, since, until):
         since=since,
         until=until,
         limit=50,
-        access_token=ACCESS_TOKEN)
+        access_token='')
 
     print(url)
     json_result = json_request(url=url)
