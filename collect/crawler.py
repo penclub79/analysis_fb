@@ -33,7 +33,7 @@ def preprocess_post(post):      #data 전처리 적재하기전의 과정
     kst = kst + timedelta(hours=9)
     post['created_time'] = kst.strftime('%Y-%m-%d %H:%M:%S')
 
-def crawling(pagename, since, until, fetch=True, result_directory='', access_key=''):
+def crawling(pagename, since, until, fetch=True, result_directory='', access_token=''):
     results = []
     filename = '%s/%s_%s_%s.json' %(result_directory, pagename, since, until)
 
@@ -42,7 +42,7 @@ def crawling(pagename, since, until, fetch=True, result_directory='', access_key
                 pagename=pagename,
                 since=since,
                 until=until,
-                access_key=access_key):
+                access_token=access_token):
             for post in posts:
                 preprocess_post(post)
             results += posts
