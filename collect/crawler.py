@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta #시간대 변경
                 #datetime 패키지고 timedelta는 함수다.
 from .api import api
-import os
+# import os
 import json
 
 # RESULT_DIRECTORY = '__results__/crawling'
@@ -76,5 +76,5 @@ def crawling(pagename, since, until, fetch=True, result_directory='', access_tok
 #
 #     return filename
 
-if os.path.exists(RESULT_DIRECTORY) is False: #import될때 실행됨
-    os.makedirs(RESULT_DIRECTORY)     #첫번째 디렉토리가 없으면 하나의 디렉토리가 생성됨
+# if os.path.exists(RESULT_DIRECTORY) is False: #import될때 실행됨
+#     os.makedirs(RESULT_DIRECTORY)     #첫번째 디렉토리가 없으면 하나의 디렉토리가 생성됨
