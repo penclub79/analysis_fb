@@ -2,7 +2,7 @@
 from urllib.parse import urlencode
 from .web_request import json_request
 
-ACCESS_TOKEN="EAACEdEose0cBADgOdTJTSycpfyS8DitIwD3mimFTbu53nwBUNNc37YYYiFxaZAXJ5zuKHEmHZBUezVjyTv8jB8bBhmS71KK4mzoZAN0mZAcSKJvOqDC2a4VYAnyMcPF5cXMctfDIUvd89ZAoZAM88PkWULZAafe5pa76PBWsZCSfshNAc56beWgrUhNwof9ThcZAxmgHnnOZCaZBwZDZD"
+ACCESS_TOKEN="EAACEdEose0cBAIvFV8ihrEELt98NdWcZBZCPTmHbkgEjPGmOq7oKZAJ4shqeNGF60YuOMp4smC8RghMvzDWGd7ZC0ESn4ImjiX1gnQdZCEPd5bZC0Gay5y3HnSDlNHG8rA2cOjGhgsmfr092jVgEDWmZACbwBuYuKnZBTMPKIT3NmZBAgFCagbH2WgV85oI4vUQDfWOsorud58QZDZD"
 BASE_URL_FB_API = "https://graph.facebook.com/v3.0"     #고정된 값이고 주소 외우삼
 
 
@@ -33,26 +33,26 @@ def fb_fetch_posts(pagename, since, until):
         access_token=ACCESS_TOKEN)
 
     print(url)
-    # json_result = json_request(url=url)
-    # print(json_result)
+    json_result = json_request(url=url)
+    print(json_result)
     #리스트로 N개를 받기위한 함수
 
     # results = []
-    isnext = True   #true냐 false에 따라서 달라고하기
-    while isnext is True: # isnext가 true면 루프돌기
-        json_result = json_request(url=url)
-        #페이징 정보 가져오기 왜? json result가 null일수 있어서
-        paging = None
-        if json_result is None:
-            paging =  None
-        else:
-            paging = json_result.get('paging') #none이 아니면 paging을 가져오자
+    # isnext = True   #true냐 false에 따라서 달라고하기
+    # while isnext is True: # isnext가 true면 루프돌기
+    #     json_result = json_request(url=url)
+    #     #페이징 정보 가져오기 왜? json result가 null일수 있어서
+    #     paging = None
+    #     if json_result is None:
+    #         paging =  None
+    #     else:
+    #         paging = json_result.get('paging') #none이 아니면 paging을 가져오자
     #위 코드는 단순 코드임
     #삼항연산자 쓰면 더 간결함
-    # isnext = True
-    # while isnext is True:
-    #     json_result = json_request(url=url)
-    #     paging = None if json_result is None else json_result.get('paging')
+    isnext = True
+    while isnext is True:
+        json_result = json_request(url=url)
+        paging = None if json_result is None else json_result.get('paging')
         posts = None if json_result is None else json_result.get('data')
 
         # results += posts #posts의 새로운 50개 리스트를 추가 하는 과정 append는 업데이트됨 ㅎㅎ
@@ -60,5 +60,5 @@ def fb_fetch_posts(pagename, since, until):
         #roop돌때 url을 다시 쓰려고 url로 잡아줌
         isnext = url is not None
 
-    # return results  #roop가 끝난다음에 결과를 출력하기 위해 바깥에 씀
+    # # return results  #roop가 끝난다음에 결과를 출력하기 위해 바깥에 씀
         yield posts  #얘는 for문 안에 넣어야 된다

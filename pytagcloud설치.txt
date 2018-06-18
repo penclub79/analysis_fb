@@ -1,0 +1,27 @@
+1 0. pygame 설치 
+2    pip install pygame 
+3 
+ 
+4    simplejson 설치 
+5    simplejson download 
+6    python setup.py install 
+7 
+ 
+8 1. pytagcloud 설치 
+9    pip install pytagcloud 
+10 
+ 
+11 2. pytagcloud 한글처리 
+12    1) python 설치 디렉토리/Lib/site-packages/pytagcloud/fonts 
+13       에 한글 폰트 복사(malgun.ttf) 
+14    2) python 설치 디렉토리/Lib/site-packages/pytagcloud/fonts/font.json 수정 
+15 
+ 
+16 	{ 
+17         "name": "Malgun", 
+18         "ttf": "malgun.ttf", 
+19         "web": "http://fonts.googleapis.com/css?family=Malgun" 
+20     } 
+21 
+ 
+22     추가 
